@@ -1,8 +1,8 @@
-</main>
-      <footer>
-        <p>&copy; 2025 LP Logística</p>
+</main> <footer>
+        <div class="content-wrapper"> 
+          <p>&copy; 2025 LP Logística</p>
+        </div> 
       </footer>
-    </div> <!-- .container -->
-  </div> <!-- .wrapper -->
+    </div> 
 </body>
 </html>

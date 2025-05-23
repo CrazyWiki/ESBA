@@ -1,5 +1,5 @@
 <?php
-require_once '../server/database.php';
+require_once '../../server/database.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = $_POST['name'];

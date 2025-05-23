@@ -1,80 +1,121 @@
 /* Estilos generales */
-html, body {
+html { /* Removed height: 100% from html, it's better on body for flex approach */
     font-family: sans-serif;
     margin: 0;
     padding: 0;
-    height: 100%;
-    background-color: #f4f4f4;
+    background-color: #f4f4f4; /* Background for behind the body if needed */
     color: #333;
     line-height: 1.6;
-  }
-  
-  .container {
-    min-height: 100vh; /* 100% высоты экрана */
+}
+
+body {
+    margin: 0; /* Ensure no default body margin */
+    padding: 0; /* Ensure no default body padding */
+    height: 100vh; /* Make body fill the viewport height */
     display: flex;
     flex-direction: column;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-  }
-  
-  /* Encabezado */
-  header {
+    background-color: #f4f4f4; /* Moved from html for clarity */
+}
+
+/* Wrapper for sticky footer and overall page structure */
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    flex: 1 0 auto; /* Allows wrapper to grow and push footer down */
+    width: 100%; /* Ensure wrapper takes full width */
+}
+
+main {
+    flex: 1 0 auto; /* Allows main content area to grow */
+}
+
+/* Full-width sections */
+header,
+.hero,
+.services, /* Added .services to ensure it can also be full-width if desired */
+.contact,
+footer {
+    width: 100%;
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+/* Encabezado */
+header {
     background-color: #fff;
-    padding: 20px 0;
+    padding-top: 15px;   /* Adjusted padding */
+    padding-bottom: 15px; /* Adjusted padding */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
+}
 
+/* Navigation container (specifically for the nav tag with class .container) */
+header nav.container {
+    max-width: 1200px; /* Max width for navigation content */
+    margin: 0 auto;    /* Center the navigation content */
+    padding: 0 20px;   /* Horizontal padding for nav content */
+    justify-content: space-between;
+    align-items: center;
+}
 
-  
-  nav ul {
+.logo img {
+    max-height: 60pt; /* Adjusted max-height slightly */
+    width: auto;      /* Allow image to scale with height, or set a fixed width */
+    display: block;   /* Removes extra space below image */
+}
+
+nav ul {
     list-style: none;
     padding: 0;
     margin: 0;
-    display: flex;
-    justify-content: space-between;
+    display: flex; /* For aligning li items */
     align-items: center;
-  }
-  
-  nav li a {
+}
+
+nav li a {
     text-decoration: none;
     color: #333;
     padding: 10px 15px;
     transition: color 0.3s ease;
-  }
-  
-  nav li a:hover {
-    color: #007bff; /* Un color primario para resaltar */
-  }
-  
-  .logo img {
-    max-height: 70pt; /* Ajusta la altura del logo */
-    width: 100%;
-  }
-  
-  /* Sección principal (Hero) */
-  .hero {
-    background-image: url('ruta/a/tu/imagen-hero.jpg'); /* Reemplaza con la ruta de tu imagen */
+}
+
+nav li a:hover {
+    color: #007bff;
+}
+
+/* NEW: General content centering class for use inside full-width sections */
+.content-wrapper {
+  width: 100%; /* Make the nav bar itself full width */
+  padding: 0 20px; /* Padding inside the nav bar, so logo/links aren't at screen edge */
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Sección principal (Hero) */
+.hero {
+    background-image: url('ruta/a/tu/imagen-hero.jpg'); /* Make sure this path is correct */
     background-size: cover;
     background-position: center;
     color: #fff;
     text-align: center;
-    padding: 100px 0;
-  }
-  
-  .hero h1 {
+    padding-top: 80px;  /* Adjusted vertical padding */
+    padding-bottom: 80px; /* Adjusted vertical padding */
+}
+
+.hero h1 {
     font-size: 3em;
+    margin-top: 0; /* Remove default top margin if padding is on .hero */
     margin-bottom: 20px;
     color: darkorange;
-  }
-  
-  .hero p {
+}
+
+.hero p {
     font-size: 1.2em;
     margin-bottom: 30px;
     color: darkorange;
-  }
-  
-  .cta-button {
+}
+
+.cta-button {
     display: inline-block;
     background-color: #007bff;
     color: #ffffff;
@@ -83,116 +124,72 @@ html, body {
     border-radius: 5px;
     font-weight: bold;
     transition: background-color 0.3s ease;
-  }
-  
-  .cta-button:hover {
+}
+
+.cta-button:hover {
     background-color: #0056b3;
-  }
-  
-  /* Sección de servicios */
-  .services {
-    padding: 50px 0;
-    text-align: center;
-  }
-  
-  .services h2 {
+}
+
+/* Sección de servicios */
+.services {
+    padding-top: 50px;  /* Vertical padding */
+    padding-bottom: 50px; /* Vertical padding */
+    /* text-align: center; /* Center heading if it's not in .content-wrapper or if .content-wrapper doesn't have text-align */
+}
+
+.services h2 { /* Ensure this is inside .content-wrapper or has its own centering if needed */
     font-size: 2.5em;
+    margin-top: 0;
     margin-bottom: 30px;
     color: #333;
-  }
-  
-  .service-grid {
+    text-align: center; /* Center the heading */
+}
+
+.service-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 30px;
     margin-top: 30px;
-  }
-  
-  .service-item {
+    text-align: left; /* Reset text-align for items if parent is centered */
+}
+
+.service-item {
     background-color: #fff;
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .service-item h3 {
+}
+
+.service-item h3 {
     font-size: 1.5em;
+    margin-top: 0;
     margin-bottom: 10px;
     color: #333;
-  }
-  
-  .service-item p {
+}
+
+.service-item p {
     color: #666;
-  }
-  
-  /* Sección de contacto */
-  .contact {
-    background-color: #eee;
-    padding: 50px 0;
-    text-align: center;
-  }
-  
-  .contact h2 {
-    font-size: 2.5em;
-    margin-bottom: 30px;
-    color: #333;
-  }
-  
-  .contact-form {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-  }
-  
-  .contact-form input[type="text"],
-  .contact-form input[type="email"],
-  .contact-form input[type="password"],
-  .contact-form textarea {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-  }
-  
-  .contact-form button {
-    background-color: #007bff;
-    color: #fff;
-    padding: 15px 30px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1em;
-    transition: background-color 0.3s ease;
-  }
-  
-  .contact-form button:hover {
-    background-color: #0056b3;
-  }
-  
-  /* Pie de página */
-  footer {
+}
+
+
+
+/* Pie de página */
+footer {
     background-color: #333;
     color: #fff;
     text-align: center;
-    padding: 20px 0;
-    font-size: 0.9em;
-    padding: 1rem 0;
-    text-align: center;
-  }
+    padding-top: 25px;  /* Adjusted vertical padding */
+    padding-bottom: 25px; /* Adjusted vertical padding */
+}
 
-  .wrapper {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  main {
-    flex: 1;
-  }
-  
- 
-  
-  
-  
+/* The old .container rule might not be needed or should be specific if used elsewhere.
+   For now, commenting out the one from your style.css file to avoid conflicts.
+   The nav now uses 'header nav.container' which is more specific.
+*/
+/*
+.container {
+  flex-direction: column;
+  margin: 0 auto;
+  padding: 20px;
+}
+*/
