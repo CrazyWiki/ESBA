@@ -3,21 +3,24 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Servicios logísticos rápidos, seguros y eficientes." />
-    <title>Logística PF</title>
+    <title>PF Logística</title>
     <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/login.css" />
     <link rel="stylesheet" href="css/contact.css" />
+    <link rel="stylesheet" href="css/login.css" />
 </head>
 <body>
+
 <header>
-    <nav class="header-nav container">
-        <a href="index.php" class="logo">Logística PF</a>
-        <ul class="nav-list">
-            <li><a href="index.php">Inicio</a></li>
-            <li><a href="servicios.php">Servicios</a></li>
-            <li><a href="area.php">Área personal</a></li>
+    <nav class="navbar">
+        <div class="logo">
+        <a href="index.php">PF Logística</a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.php#quienes-somos">Quiénes somos</a></li>
+            <li><a href="index.php#servicios">Servicios</a></li>
             <li><a href="contacto.php">Contacto</a></li>
+            <li><a href="cotizar.php">Cotizar</a></li>
+            <li><a href="area_personal.php">Iniciar sesión</a></li>
         </ul>
     </nav>
 </header>
