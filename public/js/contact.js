@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const submitBtn = document.getElementById('submitBtn');
   const responseDiv = document.getElementById('formResponse');
 
-  // Предотвращаем стандартную отправку по Enter
+  // Prevenir envío estándar
   form.addEventListener('submit', function (event) {
     event.preventDefault();
   });
@@ -13,18 +13,21 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const formData = new FormData(form);
 
-    fetch('php_scripts/insert_feedback.php', {
+    fetch('php_scripts/inser_feedback.php', {  // Ojo que el PHP se llama inser_feedback.php
       method: 'POST',
       body: formData
     })
-      .then(response => response.text())
-      .then(data => {
-        responseDiv.innerHTML = data;
+    .then(response => response.text())
+    .then(data => {
+      responseDiv.innerHTML = data;
+      // Solo resetear si no hubo error
+      if (data.includes('exitosamente')) {
         form.reset();
-      })
-      .catch(error => {
-        responseDiv.innerHTML = 'Hubo un error al enviar el mensaje.';
-        console.error('Error:', error);
-      });
+      }
+    })
+    .catch(error => {
+      responseDiv.innerHTML = 'Hubo un error al enviar el mensaje.';
+      console.error('Error:', error);
+    });
   });
 });

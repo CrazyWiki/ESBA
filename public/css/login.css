@@ -1,31 +1,31 @@
-/* Sección de logino */
+/* Sección de login */
 .login {
     background-color: #eee;
-    padding-top: 50px;  /* Vertical padding */
-    padding-bottom: 50px; /* Vertical padding */
+    padding-top: 50px;
+    padding-bottom: 50px;
     /* text-align: center; */
 }
 
-.login h2 { /* Ensure this is inside .content-wrapper or has its own centering */
+.login h2 {
     font-size: 2.5em;
     margin-top: 0;
     margin-bottom: 30px;
     color: #333;
-    text-align: center; /* Center the heading */
+    text-align: center;
 }
 
-.login-form { /* This is already well-styled for centering within its parent */
+.login-form {
     max-width: 600px;
     margin: 0 auto;
     padding: 20px;
-    background-color: #fff; /* Optional: give form a background if .login is #eee */
-    border-radius: 5px;    /* Optional: if adding background */
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* Optional subtle shadow */
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
 .login-form input[type="text"],
 .login-form input[type="email"],
-.login-form input[type="password"], /* Assuming password might be for an area.php related form */
+.login-form input[type="password"],
 .login-form textarea {
     width: 100%;
     padding: 10px;
@@ -33,6 +33,7 @@
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
+    font-size: 1em;
 }
 
 .login-form button {

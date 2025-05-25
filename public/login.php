@@ -1,41 +1,38 @@
-<?php include 'includes/header.php'; ?>
 <?php
 session_start();
-if (!isset($_SESSION['usuario_id'])) {
-    header("Location: login.php");
+if (isset($_SESSION['usuario_id'])) {
+    // Si ya está logueado, redirigir al área personal
+    header('Location: area_personal.php');
     exit();
 }
-
-// Contenido de la zona privada:
-echo "<h1>Bienvenido, " . htmlspecialchars($_SESSION['usuario_email']) . "!</h1>";
 ?>
-<main class="registro">
-    <h2>Login</h2>
 
-    <div class="login-form">
-        <button onclick="mostrarFormulario('cliente')">Login como Cliente</button>
-        <button onclick="mostrarFormulario('empleado')">Login como Empleado</button>
-    </div>
+<?php include 'includes/header.php'; ?>
 
-    <div id="formClientelogin" class="login-form">
-        <h3>Login para Cliente</h3>
-        <form action="php_scripts/login_cliente.php" method="post">
-            <input type="email" name="email" placeholder="Correo electrónico" required>
-            <input type="password" name="password" placeholder="Contraseña" required>
-            <button type="submit">Ingresar</button>
-        </form>
-    </div>
+<main class="container content-wrapper login-container">
+    <h1>Iniciar sesión</h1>
 
-    <div id="formEmpleadologin" class="login-form" style="display: none;">
-        <h3>Login para Empleado</h3>
-        <form action="procesar_registro.php" method="post">
-            <input type="email" name="email" placeholder="Correo electrónico" required>
-            <input type="password" name="password" placeholder="Contraseña" required>
-            <button type="button">Ingresar</button>
-        </form>
-    </div>
+    <form action="/php_scripts/login_cliente.php" method="POST" class="login-form" id="formCliente">
+        <h2>Cliente</h2>
+        <label for="usuario_cliente">Usuario o email:</label>
+        <input type="text" id="usuario_cliente" name="usuario" required />
+
+        <label for="password_cliente">Contraseña:</label>
+        <input type="password" id="password_cliente" name="password" required />
+
+        <button type="submit">Ingresar</button>
+    </form>
+
+    <form action="/php_scripts/login_empleado.php" method="POST" class="login-form" id="formEmpleado">
+        <h2>Empleado</h2>
+        <label for="usuario_empleado">Usuario o email:</label>
+        <input type="text" id="usuario_empleado" name="usuario" required />
+
+        <label for="password_empleado">Contraseña:</label>
+        <input type="password" id="password_empleado" name="password" required />
+
+        <button type="submit">Ingresar</button>
+    </form>
 </main>
 
-
-<script src="js/login.js"></script>
 <?php include 'includes/footer.php'; ?>

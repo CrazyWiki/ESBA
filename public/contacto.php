@@ -1,17 +1,20 @@
 <?php include 'includes/header.php'; ?>
 
-<section class="contact">
-  <h2>Contáctanos</h2>
-  <div class="contact-form">
-    <form id="contactForm">
-      <input type="text" placeholder="Nombre" name="name" required>
-      <input type="email" placeholder="Correo Electrónico" name="email" required>
-      <textarea placeholder="Mensaje" name="message" rows="5" required></textarea>
-      <button type="button" id="submitBtn">Enviar Mensaje</button>
-    </form>
-    <div id="formResponse"></div>
-  </div>
-</section>
+<main class="container content-wrapper">
+    <h1>Contacto</h1>
 
+    <form action="/php_scripts/procesar_contacto.php" method="POST" class="contact-form">
+        <label for="nombre">Nombre completo:</label>
+        <input type="text" id="nombre" name="nombre" required />
+
+        <label for="email">Correo electrónico:</label>
+        <input type="email" id="email" name="email" required />
+
+        <label for="mensaje">Mensaje:</label>
+        <textarea id="mensaje" name="mensaje" rows="5" required></textarea>
+
+        <button type="submit">Enviar</button>
+    </form>
+</main>
 
 <?php include 'includes/footer.php'; ?>

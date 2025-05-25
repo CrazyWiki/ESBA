@@ -1,47 +1,38 @@
 <?php include 'includes/header.php'; ?>
 
-<section class="hero">
-  <div class="content-wrapper"> 
-    <h1>Soluciones Logísticas BTZ</h1>
-    <p>Entregamos tus envíos de forma rápida, segura y eficiente.</p>
-    <a href="#" class="cta-button">Contáctanos</a>
-  </div> 
-</section>
+<main class="container content-wrapper">
+    <section class="hero">
+        <h1>Soluciones Logísticas PF</h1>
+        <p>Ofrecemos servicios de transporte, almacenamiento y distribución para que tu negocio crezca.</p>
+        <a href="/servicios.php" class="cta-button">Ver Servicios</a>
+    </section>
 
-<section class="services">
-  <div class="content-wrapper"> 
-    <h2>Nuestros Servicios</h2>
-    <div class="service-grid">
-      <div class="service-item">
-        <h3>Entrega1</h3>
-        <p>info.</p>
-      </div>
-      <div class="service-item">
-        <h3>Entrega2</h3>
-        <p>info.</p>
-      </div>
-      <div class="service-item">
-        <h3>Entrega3</h3>
-        <p>info.</p>
-      </div>
-    </div>
-  </div> 
-</section>
+    <section id="nosotros" class="about-us">
+        <h2>Quiénes somos</h2>
+        <p>LP Logística es líder en soluciones integrales de logística y transporte, brindando servicios de alta calidad y confianza en todo el país.</p>
+    </section>
 
-<section class="contact">
-  <div class="content-wrapper"> 
-    <h2>Contáctanos</h2>
-    <div class="contact-form"> 
-      <form id="contactForm">
-        <input type="text" placeholder="Nombre" name="name" required>
-        <input type="email" placeholder="Correo Electrónico" name="email" required>
-        <textarea placeholder="Mensaje" name="message" rows="5" required></textarea>
-        <button type="button" id="submitBtn">Enviar Mensaje</button>
-      </form>
-      <div id="formResponse"></div>
-    </div>
-  </div> 
-</section>
-<script src="js/contact.js" defer></script>
+    <section class="services-preview">
+        <h2>Servicios principales</h2>
+        <div class="service-grid">
+            <div class="service-item">
+                <h3>Transporte Nacional</h3>
+                <p>Envíos rápidos y seguros a todo el territorio nacional.</p>
+            </div>
+            <div class="service-item">
+                <h3>Almacenamiento</h3>
+                <p>Depósitos con tecnología avanzada para resguardar tus productos.</p>
+            </div>
+            <div class="service-item">
+                <h3>Distribución</h3>
+                <p>Optimización de rutas para entregas eficientes.</p>
+            </div>
+            <div class="service-item">
+                <h3>Seguimiento en línea</h3>
+                <p>Monitoreo de tus envíos en tiempo real desde nuestra plataforma.</p>
+            </div>
+        </div>
+    </section>
+</main>
 
 <?php include 'includes/footer.php'; ?>

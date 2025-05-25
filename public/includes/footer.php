@@ -1,8 +1,5 @@
-</main> <footer>
-        <div class="content-wrapper"> 
-          <p>&copy; 2025 LP Logística</p>
-        </div> 
-      </footer>
-    </div> 
+<footer class="footer container">
+    <p>&copy; <?php echo date('Y'); ?> Logística PF. Todos los derechos reservados.</p>
+</footer>
 </body>
 </html>
