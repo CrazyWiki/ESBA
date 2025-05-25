@@ -10,16 +10,12 @@
             <p>Servicio de transporte rápido y seguro en todo el país.</p>
         </article>
         <article>
-            <h2>Almacenamiento</h2>
-            <p>Depósitos con condiciones óptimas para tu mercadería.</p>
+            <h2>Seguimiento</h2>
+            <p>Brindamos un seguimiento para que estes al dia con tus envios.</p>
         </article>
         <article>
             <h2>Distribución</h2>
             <p>Optimización y planificación de rutas para mayor eficiencia.</p>
-        </article>
-        <article>
-            <h2>Logística Integral</h2>
-            <p>Soluciones a medida para la gestión completa de tu cadena logística.</p>
         </article>
     </section>
 </main>
