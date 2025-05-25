@@ -16,10 +16,9 @@
         <a href="index.php">PF Logística</a>
         </div>
         <ul class="nav-links">
-            <li><a href="index.php#quienes-somos">Quiénes somos</a></li>
-            <li><a href="index.php#servicios">Servicios</a></li>
+            <li><a href="index.php">Quiénes somos</a></li>
+            <li><a href="servicios.php">Servicios</a></li>
             <li><a href="contacto.php">Contacto</a></li>
-            <li><a href="cotizar.php">Cotizar</a></li>
             <li><a href="area_personal.php">Iniciar sesión</a></li>
         </ul>
     </nav>
