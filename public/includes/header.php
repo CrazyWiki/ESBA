@@ -15,7 +15,7 @@
 <body>
   <div class="wrapper"> <header>
       <nav class="header nav.container"> <div class="logo">
-          <img src="images/logohead.png" alt="Logo de la empresa" />
+          <img src="images/logohead.png" alt="Logo de la empresa" href="index.php"/>
         </div>
         <ul>
           <li><a href="index.php">Inicio</a></li>

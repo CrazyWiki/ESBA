@@ -4,7 +4,6 @@
   <div class="content-wrapper"> 
     <h1>Soluciones Logísticas BTZ</h1>
     <p>Entregamos tus envíos de forma rápida, segura y eficiente.</p>
-    <a href="#" class="cta-button">Contáctanos</a>
   </div> 
 </section>
 
