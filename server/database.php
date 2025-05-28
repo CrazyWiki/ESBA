@@ -1,8 +1,8 @@
 <?php
 
 $servername = "localhost"; 
-$username = "root";        
-$password = "";            
+$username = "esba_user";        
+$password = "1234";            
 $dbname = "esbaproj";      
 
 // Crear conexión
