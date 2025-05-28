@@ -2,7 +2,7 @@
 
 <section class="hero">
   <div class="content-wrapper"> 
-    <h1>Soluciones Logísticas BTZ</h1>
+    <h1>Soluciones Logísticas PF</h1>
     <p>Entregamos tus envíos de forma rápida, segura y eficiente.</p>
   </div> 
 </section>
@@ -35,12 +35,12 @@
         <input type="text" placeholder="Nombre" name="name" required>
         <input type="email" placeholder="Correo Electrónico" name="email" required>
         <textarea placeholder="Mensaje" name="message" rows="5" required></textarea>
-        <button type="button" id="submitBtn">Enviar Mensaje</button>
+        <button type="submit" id="submitBtn">Enviar Mensaje</button>
       </form>
       <div id="formResponse"></div>
     </div>
   </div> 
 </section>
-<script src="js/contact.js" defer></script>
 
+<script src="js/contact.js" defer></script>
 <?php include 'includes/footer.php'; ?>
