@@ -1,8 +1,8 @@
 <?php
 $servername = "localhost";
-$username = "root";
-$password = ""; // o la contraseña que uses
-$dbname = "esbaproj";
+$username = "esba_user";
+$password = "esba123";  // la que elegiste
+$dbname = "esbaproj";   // asegurate que exista esta base
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
