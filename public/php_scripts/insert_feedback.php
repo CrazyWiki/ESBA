@@ -1,5 +1,5 @@
 <?php
-require_once '../server/database.php'; // Ajustá la ruta según tu estructura real
+require_once '../../server/database.php'; // ruta corregida
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = trim($_POST['name'] ?? '');
@@ -29,4 +29,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 } else {
     echo '<p style="color: orange;">Este script solo acepta solicitudes POST.</p>';
 }
-?>
