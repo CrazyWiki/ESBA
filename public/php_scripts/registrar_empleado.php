@@ -3,8 +3,8 @@ require_once '../../server/database.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['tipo'] === 'empleado') {
     $nombre = $_POST['nombre'];
-    $email = $_POST['email'];
     $cargo = $_POST['cargo'];
+    $email = $_POST['email'];
     $password = $_POST['password'];
 
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -24,17 +24,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['tipo'] === 'empleado') {
         $id_usuario = $conn->insert_id;
 
         // Insertar en Empleados
-        $stmtEmpleado = $conn->prepare("INSERT INTO Empleados (nombre, email, cargo, Usuarios_id_usuario) VALUES (?, ?, ?, ?)");
-        $stmtEmpleado->bind_param("sssi", $nombre, $email, $cargo, $id_usuario);
+        $stmtEmpleado = $conn->prepare("INSERT INTO Empleados (nombre, cargo, Usuarios_id_usuario) VALUES (?, ?, ?)");
+        $stmtEmpleado->bind_param("ssi", $nombre, $cargo, $id_usuario);
         $stmtEmpleado->execute();
 
         $conn->commit();
         echo "Empleado registrado correctamente.";
     } catch (mysqli_sql_exception $e) {
         $conn->rollback();
-        echo "Error en el registro: " . $e->getMessage();
+
+        // Detectar código de error 1062 (entrada duplicada)
+        if ($e->getCode() === 1062) {
+            echo "El correo electrónico ya está registrado.";
+        } else {
+            echo "Error en el registro: " . $e->getMessage();
+        }
     }
 } else {
     echo "Solicitud inválida.";
 }
-?>
