@@ -17,7 +17,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['tipo'] === 'cliente') {
 
     $password_hash = password_hash($password, PASSWORD_DEFAULT);
 
-    // Empezar transacción
     $conn->begin_transaction();
 
     try {
@@ -40,9 +39,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['tipo'] === 'cliente') {
         echo "Cliente registrado correctamente.";
     } catch (mysqli_sql_exception $e) {
         $conn->rollback();
-        echo "Error en el registro: " . $e->getMessage();
+
+        if ($e->getCode() === 1062) {
+            echo "El correo electrónico ya está registrado.";
+        } else {
+            echo "Error en el registro: " . $e->getMessage();
+        }
     }
 } else {
     echo "Solicitud inválida.";
 }
-?>
