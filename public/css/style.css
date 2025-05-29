@@ -193,3 +193,15 @@ footer {
   padding: 20px;
 }
 */
+
+.respuesta-registro {
+  margin-top: 10px;
+  font-weight: bold;
+  color: #333;
+  padding: 8px;
+  border-radius: 5px;
+}
+
+.respuesta-registro:empty {
+  display: none;
+}
