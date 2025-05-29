@@ -28,13 +28,13 @@
 
   <div id="formEmpleado" class="contact-form" style="display: none;">
     <h3>Registro de Empleado</h3>
-    <form action="procesar_registro.php" method="post">
+    <form action="php_scripts/registrar_empleado.php" method="post">
       <input type="hidden" name="tipo" value="empleado">
       <input type="text" name="nombre" placeholder="Nombre completo" required>
       <input type="email" name="email" placeholder="Correo electrónico" required>
       <input type="text" name="cargo" placeholder="Cargo" required>
       <input type="password" name="password" placeholder="Contraseña" required>
-      <button type="button">Registrarse</button>
+      <button type="submit">Registrarse</button> <!-- Cambié de type="button" a "submit" -->
     </form>
   </div>
 </main>
