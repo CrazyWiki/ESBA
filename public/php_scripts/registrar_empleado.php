@@ -13,6 +13,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['tipo'] === 'empleado') {
 
     $password_hash = password_hash($password, PASSWORD_DEFAULT);
 
+    // Validar si el email ya existe
+    $stmtCheck = $conn->prepare("SELECT id_usuario FROM Usuarios WHERE email = ?");
+    $stmtCheck->bind_param("s", $email);
+    $stmtCheck->execute();
+    $stmtCheck->store_result();
+
+    if ($stmtCheck->num_rows > 0) {
+        echo "El correo electrónico ya está registrado. Por favor usa otro.";
+        exit;
+    }
+    $stmtCheck->close();
+
     $conn->begin_transaction();
 
     try {
