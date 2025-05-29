@@ -1,25 +1,53 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const form = document.querySelector('#formCliente form');
-    const responseDiv = document.createElement('div');
-    form.appendChild(responseDiv);
+  // CLIENTE
+  const formCliente = document.querySelector('#formCliente form');
+  const responseDivCliente = document.createElement('div');
+  formCliente.appendChild(responseDivCliente);
 
-    form.addEventListener('submit', function (event) {
-      event.preventDefault();
+  formCliente.addEventListener('submit', function (event) {
+    event.preventDefault();
+    const formData = new FormData(formCliente);
 
-      const formData = new FormData(form);
-
-      fetch('php_scripts/registrar_cliente.php', {
-        method: 'POST',
-        body: formData
-      })
+    fetch('php_scripts/registrar_cliente.php', {
+      method: 'POST',
+      body: formData
+    })
       .then(response => response.text())
       .then(data => {
-        responseDiv.innerHTML = data;
-        form.reset();
+        responseDivCliente.innerHTML = data;
+        if (!data.includes("Error") && !data.includes("ya está registrado")) {
+          formCliente.reset();
+        }
       })
       .catch(error => {
-        responseDiv.innerHTML = 'Error al registrar el cliente.';
+        responseDivCliente.innerHTML = 'Error al registrar el cliente.';
         console.error('Error:', error);
       });
-    });
   });
+
+  // EMPLEADO
+  const formEmpleado = document.querySelector('#formEmpleado form');
+  const responseDivEmpleado = document.createElement('div');
+  formEmpleado.appendChild(responseDivEmpleado);
+
+  formEmpleado.addEventListener('submit', function (event) {
+    event.preventDefault();
+    const formData = new FormData(formEmpleado);
+
+    fetch('php_scripts/registrar_empleado.php', {
+      method: 'POST',
+      body: formData
+    })
+      .then(response => response.text())
+      .then(data => {
+        responseDivEmpleado.innerHTML = data;
+        if (!data.includes("Error") && !data.includes("ya está registrado")) {
+          formEmpleado.reset();
+        }
+      })
+      .catch(error => {
+        responseDivEmpleado.innerHTML = 'Error al registrar el empleado.';
+        console.error('Error:', error);
+      });
+  });
+});
