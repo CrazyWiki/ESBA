@@ -1,14 +1,5 @@
 <?php include 'includes/header.php'; ?>
-<?php
-session_start();
-if (!isset($_SESSION['usuario_id'])) {
-    header("Location: login.php");
-    exit();
-}
 
-// Contenido de la zona privada:
-echo "<h1>Bienvenido, " . htmlspecialchars($_SESSION['usuario_email']) . "!</h1>";
-?>
 <main class="registro">
     <h2>Login</h2>
 
