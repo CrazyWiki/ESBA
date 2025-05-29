@@ -46,5 +46,6 @@
   }
 </script>
 <script src="js/registro.js" defer></script>
+<script src="js/registro_empleado.js" defer></script>
 
 <?php include 'includes/footer.php'; ?>

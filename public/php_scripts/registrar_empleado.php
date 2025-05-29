@@ -13,18 +13,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['tipo'] === 'empleado') {
 
     $password_hash = password_hash($password, PASSWORD_DEFAULT);
 
-    // Validar si el email ya existe
-    $stmtCheck = $conn->prepare("SELECT id_usuario FROM Usuarios WHERE email = ?");
-    $stmtCheck->bind_param("s", $email);
-    $stmtCheck->execute();
-    $stmtCheck->store_result();
-
-    if ($stmtCheck->num_rows > 0) {
-        echo "El correo electrónico ya está registrado. Por favor usa otro.";
-        exit;
-    }
-    $stmtCheck->close();
-
     $conn->begin_transaction();
 
     try {
@@ -36,8 +24,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['tipo'] === 'empleado') {
         $id_usuario = $conn->insert_id;
 
         // Insertar en Empleados
-        $stmtEmpleado = $conn->prepare("INSERT INTO Empleados (nombre, cargo, Usuarios_id_usuario) VALUES (?, ?, ?)");
-        $stmtEmpleado->bind_param("ssi", $nombre, $cargo, $id_usuario);
+        $stmtEmpleado = $conn->prepare("INSERT INTO Empleados (nombre, email, cargo, Usuarios_id_usuario) VALUES (?, ?, ?, ?)");
+        $stmtEmpleado->bind_param("sssi", $nombre, $email, $cargo, $id_usuario);
         $stmtEmpleado->execute();
 
         $conn->commit();
