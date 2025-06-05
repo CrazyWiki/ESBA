@@ -19,14 +19,14 @@
 
     <div id="formEmpleadologin" class="login-form" style="display: none;">
         <h3>Login para Empleado</h3>
-        <form action="procesar_registro.php" method="post">
+        <!-- Cambié el action al nuevo script de empleados y el type a submit -->
+        <form action="php_scripts/login_empleado.php" method="post">
             <input type="email" name="email" placeholder="Correo electrónico" required>
             <input type="password" name="password" placeholder="Contraseña" required>
-            <button type="button">Ingresar</button>
+            <button type="submit">Ingresar</button>
         </form>
     </div>
 </main>
-
 
 <script src="js/login.js"></script>
 <?php include 'includes/footer.php'; ?>

@@ -220,14 +220,9 @@ footer {
     /* Adjusted vertical padding */
 }
 
-/* The old .container rule might not be needed or should be specific if used elsewhere.
-   For now, commenting out the one from your style.css file to avoid conflicts.
-   The nav now uses 'header nav.container' which is more specific.
-*/
-/*
-.container {
-  flex-direction: column;
-  margin: 0 auto;
-  padding: 20px;
-}
-*/
+
+
+
+
+
+
