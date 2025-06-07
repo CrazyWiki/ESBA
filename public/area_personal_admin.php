@@ -1,120 +1,40 @@
 <?php
-session_start();
+// Incluimos el header. Él se encarga de iniciar la sesión y mostrar el menú correcto.
+include 'includes/header.php';
+
+// Verificación de seguridad: si no es un admin, lo sacamos de aquí.
 if (!isset($_SESSION['admin_id'])) {
-    header("Location: login.php");
+    header("Location: login.php"); // Redirigir a la página de login
     exit();
 }
 ?>
 
-<?php include 'includes/header.php'; ?>
+<div class="admin-panel-container">
+    <div class="admin-panel-header">
+        <h2>Panel de Control de Tablas</h2>
+        </div>
 
-<h1>Panel de Administración</h1>
+    <div class="admin-controls-area">
+        <label for="tableSelector">Seleccione una tabla para administrar:</label>
+        <select id="tableSelector">
+            <option value="">Cargando lista de tablas...</option>
+        </select>
+    </div>
 
-<div class="admin-buttons">
-  <?php
-  // Список таблиц для кнопок
-  $tables = [
-    'Usuarios', 'Clientes', 'Servicios', 'Tarifas',
-    'EstadoEnvio', 'Administradores', 'Conductores',
-    'Vehiculos', 'Envios', 'DetalleEnvio', 'Feedback'
-  ];
-  foreach ($tables as $table) {
-    echo "<button class='table-button' data-table='$table'>$table</button> ";
-  }
-  ?>
+    <div id="adminUserMessageArea"></div>
+
+    <div class="admin-table-actions-bar">
+        <button id="adminAddNewRowBtn" class="admin-action-button admin-hidden">Añadir nueva fila</button>
+    </div>
+
+    <div id="adminDynamicTableContainer">
+        <p class="admin-info-text">Por favor, seleccione una tabla del menú desplegable.</p>
+    </div>
 </div>
 
+<script src="js/admin_panel_app.js"></script>
 
-
-<div id="table-container">
-  <!-- Здесь будет загружаться таблица для редактирования -->
-</div>
-
-<!-- Кнопка добавления новой записи -->
-<button id="add-row-btn">Добавить новую строку</button>
-
-<script>
-// При клике на кнопку таблицы — загружаем таблицу
-document.querySelectorAll('.table-button').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const table = btn.getAttribute('data-table');
-
-    // Делаем активной эту кнопку
-    document.querySelectorAll('.table-button').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-
-    fetch(`php_scripts/load_table.php?table=${table}`)
-      .then(response => response.text())
-      .then(html => {
-        document.getElementById('table-container').innerHTML = html;
-
-        // Показываем кнопку добавления строки
-        document.getElementById('add-row-btn').style.display = 'inline-block';
-        document.getElementById('add-row-btn').setAttribute('data-table', table);
-      });
-  });
-});
-
-// Обработка событий на странице (сохранение / удаление)
-document.addEventListener('click', e => {
-  // Сохранение
-  if (e.target.classList.contains('save-btn')) {
-    const row = e.target.closest('tr');
-    const cells = row.querySelectorAll('td[contenteditable]');
-    const data = [];
-    cells.forEach(cell => data.push(cell.textContent));
-
-    const table = document.querySelector('.table-button.active').dataset.table;
-
-    fetch('php_scripts/save_row.php', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({ table, data })
-    })
-    .then(res => res.text())
-    .then(response => alert(response));
-  }
-
-  if (e.target.classList.contains('delete-btn')) {
-    if (!confirm('¿Estás seguro de que quieres eliminar esta fila?')) return;
-
-    const row = e.target.closest('tr');
-    const id = row.querySelector('td').textContent;
-    const table = document.querySelector('.table-button.active').dataset.table;
-
-    fetch('php_scripts/delete_row.php', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({ table, id })
-    })
-    .then(res => res.text())
-    .then(response => {
-      alert(response);
-      row.remove();
-    });
-  }
-});
-
-// Добавление новой записи
-document.getElementById('add-row-btn').addEventListener('click', () => {
-  const table = document.getElementById('add-row-btn').getAttribute('data-table');
-
-  fetch('php_scripts/add_row.php', {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({ table })
-  })
-  .then(res => res.text())
-  .then(response => {
-    alert(response);
-    // Перезагрузим таблицу
-    fetch(`php_scripts/load_table.php?table=${table}`)
-      .then(res => res.text())
-      .then(html => {
-        document.getElementById('table-container').innerHTML = html;
-      });
-  });
-});
-</script>
-
-<?php include 'includes/footer.php'; ?>
+<?php
+// Incluimos el footer para cerrar la página.
+include 'includes/footer.php'; 
+?>

@@ -1,72 +1,100 @@
 <?php
-require_once '../../server/database.php'; // путь к твоему подключению БД
+require_once __DIR__ . '/auth_check.php';
+require_once __DIR__ . '/../../server/database.php';
+
+if ($conn->connect_error) {
+    http_response_code(503); // Service Unavailable
+    echo json_encode([
+        'success' => false,
+        'message' => 'Error de conexión a la base de datos: (' . $conn->connect_errno . ') ' . $conn->connect_error
+    ]);
+    exit();
+}
+
+header('Content-Type: application/json');
 
 if (!isset($_GET['table'])) {
-  echo "No table specified.";
-  exit();
+    http_response_code(400); // Bad Request
+    echo json_encode(['success' => false, 'message' => 'El nombre de la tabla no se especificó en la solicitud.']);
+    exit();
 }
 
-$table = $_GET['table'];
+$tableName = $_GET['table'];
 
-// Проверка, что таблица разрешена
-$allowedTables = [
-  'Usuarios', 'Clientes', 'Servicios', 'Tarifas',
-  'EstadoEnvio', 'Administradores', 'Conductores',
-  'Vehiculos', 'Envios', 'DetalleEnvio', 'Feedback'
-];
-
-if (!in_array($table, $allowedTables)) {
-  echo "Table not allowed.";
-  exit();
+// ---- IMPORTANTE: Validación del nombre de la tabla para seguridad ----
+$allowedTables = [];
+$resultValidation = $conn->query("SHOW TABLES");
+if ($resultValidation) {
+    while ($rowValidation = $resultValidation->fetch_array()) {
+        $allowedTables[] = $rowValidation[0];
+    }
+} else {
+    http_response_code(500);
+    echo json_encode(['success' => false, 'message' => 'No se pudo verificar la lista de tablas disponibles: ' . $conn->error]);
+    exit();
 }
 
-// Загружаем данные
-$query = "SELECT * FROM $table";
-$result = $conn->query($query);
+if (!in_array($tableName, $allowedTables)) {
+    http_response_code(403); // Forbidden
+    echo json_encode(['success' => false, 'message' => "El acceso a la tabla '$tableName' está prohibido o no existe."]);
+    exit();
+}
+// ---- Fin de la validación ----
 
-if (!$result) {
-  echo "Error: " . $conn->error;
-  exit();
+// Obtener la estructura de la tabla (columnas e información de la clave primaria)
+$columnsMeta = [];
+$primaryKeyField = null;
+$describeResult = $conn->query("DESCRIBE `" . $conn->real_escape_string($tableName) . "`");
+
+if ($describeResult) {
+    while ($col = $describeResult->fetch_assoc()) {
+        $columnsMeta[] = $col;
+        if (isset($col['Key']) && $col['Key'] == 'PRI') {
+            $primaryKeyField = $col['Field'];
+        }
+    }
+} else {
+    http_response_code(500);
+    echo json_encode(['success' => false, 'message' => 'Error al obtener la estructura de la tabla: ' . $conn->error]);
+    exit();
 }
 
-// Отображаем данные в таблице
-echo "<h2>Tabla: $table</h2>";
-echo "<table border='1'><tr>";
-while ($field = $result->fetch_field()) {
-  echo "<th>{$field->name}</th>";
-}
-echo "<th>Acciones</th></tr>";
-
-while ($row = $result->fetch_assoc()) {
-  echo "<tr>";
-  foreach ($row as $cell) {
-    echo "<td contenteditable='true'>$cell</td>";
-  }
-  echo "<td><button class='save-btn'>Guardar</button></td>";
-  echo "</tr>";
+// Intentar encontrar auto_increment si no se encontró la PK a través de 'PRI'
+if ($primaryKeyField === null) {
+    foreach ($columnsMeta as $col) {
+        if (isset($col['Extra']) && strpos(strtolower($col['Extra']), 'auto_increment') !== false) {
+            $primaryKeyField = $col['Field'];
+            break;
+        }
+    }
 }
 
-echo "</table>";
-
-// TODO: можно сделать JS для отправки обновлений (fetch POST)
-//$conn->close();
-echo "<h2>Tabla: $table</h2>";
-
-
-while ($row = $result->fetch_assoc()) {
-  echo "<tr>";
-  foreach ($row as $cell) {
-    echo "<td contenteditable='true'>$cell</td>";
-  }
-  echo "<td>
-          <button class='save-btn'>Guardar</button>
-          <button class='delete-btn'>Eliminar</button>
-        </td>";
-  echo "</tr>";
+// Si aún no se encuentra la clave primaria, detener ejecución
+if ($primaryKeyField === null) {
+    http_response_code(500);
+    echo json_encode(['success' => false, 'message' => "No se pudo determinar la clave primaria para la tabla '$tableName'. Asegúrese de que la tabla tenga una clave primaria (PRIMARY KEY)."]);
+    exit();
 }
 
-echo "</table>";
+// Obtener todos los datos de la tabla
+$rowsData = [];
+$queryData = "SELECT * FROM `" . $conn->real_escape_string($tableName) . "`";
+$dataResult = $conn->query($queryData);
+
+if ($dataResult) {
+    while ($row = $dataResult->fetch_assoc()) {
+        $rowsData[] = $row;
+    }
+    echo json_encode([
+        'success' => true,
+        'columns' => $columnsMeta,
+        'rows' => $rowsData,
+        'primaryKey' => $primaryKeyField
+    ]);
+} else {
+    http_response_code(500);
+    echo json_encode(['success' => false, 'message' => 'Error al cargar los datos de la tabla: ' . $conn->error]);
+}
 
 $conn->close();
-
 ?>
