@@ -1,228 +1,718 @@
-/* Estilos generales */
-html {
-    height: 100%;
-    /* Removed height: 100% from html, it's better on body for flex approach */
-    font-family: sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-    /* Background for behind the body if needed */
-    color: #333;
-    line-height: 1.6;
+/* Reset y base */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-body {
-    margin: 0;
-    /* Ensure no default body margin */
-    padding: 0;
-    /* Ensure no default body padding */
-    height: 100vh;
-    /* Make body fill the viewport height */
-    /*display: flex;*/
-    flex-direction: column;
-    background-color: #f4f4f4;
-    /* Moved from html for clarity */
+body, html {
+  height: 100%;
+  font-family: sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+  line-height: 1.6;
 }
 
-/* Wrapper for sticky footer and overall page structure */
 .wrapper {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    /*display: flex;*/
-    flex-direction: column;
-    flex: 1 0 auto;
-    /* Allows wrapper to grow and push footer down */
-    width: 100%;
-    /* Ensure wrapper takes full width */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
-
 main {
-    flex-grow: 1; /* Заставляет main занять всё доступное пространство */
-    flex: 1 0 auto;
-    /* Allows main content area to grow */
+  flex: 1;
 }
 
-
-/* Full-width sections */
-header,
-container,
-.hero,
-.services,
-/* Added .services to ensure it can also be full-width if desired */
-.contact,
-footer {
-    width: 100%;
-    box-sizing: border-box;
-    /* Include padding and border in the element's total width and height */
-}
-
-/* Encabezado */
+/* Navbar */
 header {
-    background-color: #fff;
-    padding-top: 15px;
-    /* Adjusted padding */
-    padding-bottom: 15px;
-    /* Adjusted padding */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-/* Navigation container (specifically for the nav tag with class .container) */
-/* Навбар общий */
 .navbar {
-    width: 100%;
-    background: linear-gradient(to right, #ffffff, #f0f0f0);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 30px;
-    box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
 }
 
-/* Логотип */
 .logo img {
-    height: 60px;
-    max-width: 100%;
-    display: block;
+  height: 60px;
 }
 
-/* Меню */
 .menu {
-    display: flex;
-    flex-wrap: wrap;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    gap: 20px;
+  display: flex;
+  gap: 20px;
+  list-style: none;
 }
 
-/* Пункты меню */
 .menu li a {
-    text-decoration: none;
-    color: #333;
-    font-weight: 600;
-    padding: 10px 15px;
-    border-radius: 5px;
-    transition: all 0.3s ease;
+  text-decoration: none;
+  color: #333;
+  font-weight: 600;
+  padding: 10px 15px;
+  border-radius: 5px;
+  transition: 0.3s;
 }
 
 .menu li a:hover {
-    background-color: #007bff;
-    color: #fff;
+  background-color: #007bff;
+  color: #fff;
 }
 
-/* NEW: General content centering class for use inside full-width sections */
-.content-wrapper {
-    width: 100%;
-    /* Make the nav bar itself full width */
-    padding: 0 20px;
-    /* Padding inside the nav bar, so logo/links aren't at screen edge */
-    box-sizing: border-box;
-    /*display: flex;*/
-    justify-content: space-between;
-    align-items: center;
-}
-
-/* Sección principal (Hero) */
+/* Hero */
 .hero {
-    background-image: url('ruta/a/tu/imagen-hero.jpg');
-    /* Make sure this path is correct */
-    background-size: cover;
-    background-position: center;
-    color: #fff;
-    text-align: center;
-    padding-top: 80px;
-    /* Adjusted vertical padding */
-    padding-bottom: 80px;
-    /* Adjusted vertical padding */
+  background: url('ruta/a/tu/imagen-hero.jpg') center/cover no-repeat;
+  text-align: center;
+  color: darkorange;
+  padding: 80px 20px;
 }
 
 .hero h1 {
-    font-size: 3em;
-    margin-top: 0;
-    /* Remove default top margin if padding is on .hero */
-    margin-bottom: 20px;
-    color: darkorange;
+  font-size: 3em;
 }
 
 .hero p {
-    font-size: 1.2em;
-    margin-bottom: 30px;
-    color: darkorange;
+  font-size: 1.2em;
+  margin-bottom: 30px;
 }
 
 .cta-button {
-    display: inline-block;
-    background-color: #007bff;
-    color: #ffffff;
-    padding: 15px 30px;
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
+  background: #007bff;
+  color: #fff;
+  padding: 15px 30px;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: 0.3s;
 }
 
 .cta-button:hover {
-    background-color: #0056b3;
+  background: #0056b3;
 }
 
-/* Sección de servicios */
+/* Services */
 .services {
-    padding-top: 50px;
-    /* Vertical padding */
-    padding-bottom: 50px;
-    /* Vertical padding */
-    /* text-align: center; /* Center heading if it's not in .content-wrapper or if .content-wrapper doesn't have text-align */
+  padding: 50px 20px;
 }
 
 .services h2 {
-    /* Ensure this is inside .content-wrapper or has its own centering if needed */
+  text-align: center;
+  font-size: 2.5em;
+  margin-bottom: 30px;
+}
+
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.service-item {
+  background: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.service-item h3 {
+  margin-bottom: 10px;
+}
+
+/* Contact */
+.contact {
+  padding: 50px 20px;
+}
+
+.contact h2 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.contact-form {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.contact-form button {
+  width: 100%;
+  background: #007bff;
+  color: #fff;
+  border: none;
+  padding: 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.contact-form button:hover {
+  background: #0056b3;
+}
+
+/* Footer */
+footer {
+  background: #333;
+  color: #fff;
+  text-align: center;
+  padding: 25px 0;
+}
+/* Área personal */
+.personal-area-container {
+  padding: 50px 20px;
+  background-color: #fff;
+}
+
+.page-header h2 {
+  font-size: 2em;
+  margin-bottom: 20px;
+  color: #333;
+  text-align: center;
+}
+
+.panel {
+  background: #f9f9f9;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin-bottom: 40px;
+}
+
+.panel h3 {
+  margin-bottom: 20px;
+  color: #007bff;
+}
+
+.order-form .form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.order-form label {
+  margin-bottom: 5px;
+  font-weight: 600;
+  color: #555;
+}
+
+.order-form input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.order-form .cta-button {
+  background: #007bff;
+  color: #fff;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.order-form .cta-button:hover {
+  background: #0056b3;
+}
+
+.section-title {
+  margin-top: 40px;
+  margin-bottom: 20px;
+  color: #007bff;
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+.shipment-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.shipment-table th, .shipment-table td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  text-align: center;
+}
+
+.shipment-table th {
+  background: #007bff;
+  color: #fff;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.85em;
+  font-weight: 600;
+  color: #0c0808;
+}
+
+.status-badge.status-entregado {
+  background: #28a745;
+}
+
+.status-badge.status-en-camino {
+  background: #ffc107;
+}
+
+.status-badge.status-pendiente {
+  background: #dc3545;
+}
+
+.user-message {
+  background: #d4edda;
+  color: #155724;
+  padding: 10px 15px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+/* Panel de administración */
+.admin-panel-container {
+  padding: 50px 20px;
+  background: #fff;
+}
+
+.page-header h2 {
+  font-size: 2em;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.admin-controls {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-controls label {
+  margin-bottom: 5px;
+  font-weight: 600;
+  color: #555;
+}
+
+.admin-controls select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.admin-actions-bar {
+  margin-top: 20px;
+}
+
+.cta-button {
+  background: #007bff;
+  color: #fff;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.cta-button:hover {
+  background: #0056b3;
+}
+
+.admin-info-text {
+  text-align: center;
+  color: #666;
+  margin-top: 20px;
+}
+
+.admin-table-container {
+  margin-top: 20px;
+}
+
+.user-message {
+  background: #d4edda;
+  color: #155724;
+  padding: 10px 15px;
+  border-radius: 5px;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.admin-hidden {
+  display: none;
+}
+/* Panel del conductor */
+.filter-panel {
+  margin: 20px 0;
+  background: #f9f9f9;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.filter-panel h5 {
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.filter-group {
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-group label {
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+.filter-group .form-control,
+.filter-group .form-select {
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.update-form {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.no-results {
+  text-align: center;
+  color: #999;
+}
+
+.error-message {
+  background: #f8d7da;
+  color: #721c24;
+  border-color: #f5c6cb;
+}
+/* --- Стили для блока регистрации на странице входа --- */
+
+.registro-link-container {
+    text-align: center;
+    margin-top: 40px; /* Отступ сверху от форм входа */
+    padding: 20px;
+    background-color: #f8f9fa; /* Слегка отличный от основного фона цвет */
+    border: 1px solid #e9ecef;
+    border-radius: 5px;
+}
+
+.registro-link-container p {
+    margin: 0;
+    font-size: 1.1em;
+    color: #6c757d; /* Второстепенный цвет текста */
+}
+
+.registro-link-container a {
+    color: #007bff; /* Основной синий цвет для ссылок */
+    font-weight: bold;
+    text-decoration: none;
+    transition: text-decoration 0.3s ease;
+}
+
+.registro-link-container a:hover {
+    text-decoration: underline;
+}
+
+/* --- Стили для карусели услуг --- */
+
+.service-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    text-align: center;
+    padding: 20px;
+    margin: 0 10px; /* Добавляем отступы между карточками */
+    transition: transform 0.3s ease;
+    height: 100%; /* Убедимся, что все карточки в ряду одной высоты */
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+}
+
+.service-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.service-card h3 {
+    font-size: 1.4em;
+    color: #333;
+    margin-bottom: 10px;
+    min-height: 56px; /* Задаем минимальную высоту для заголовков */
+}
+
+.service-card p {
+    font-size: 0.95em;
+    color: #666;
+}
+
+/* Стили для стрелок карусели */
+.carousel-control-prev-icon, .carousel-control-next-icon {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    padding: 20px;
+}
+
+.login {
+    background-color: #eee;
+    padding-top: 50px;  /* Vertical padding */
+    padding-bottom: 50px; /* Vertical padding */
+    /* text-align: center; */
+}
+
+.login h2 { /* Ensure this is inside .content-wrapper or has its own centering */
     font-size: 2.5em;
     margin-top: 0;
     margin-bottom: 30px;
     color: #333;
-    text-align: center;
-    /* Center the heading */
+    text-align: center; /* Center the heading */
 }
 
-.service-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-    margin-top: 30px;
-    text-align: left;
-    /* Reset text-align for items if parent is centered */
-}
-
-.service-item {
-    background-color: #fff;
+.login-form { /* This is already well-styled for centering within its parent */
+    max-width: 600px;
+    margin: 0 auto;
     padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #fff; /* Optional: give form a background if .login is #eee */
+    border-radius: 5px;    /* Optional: if adding background */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* Optional subtle shadow */
 }
 
-.service-item h3 {
-    font-size: 1.5em;
-    margin-top: 0;
-    margin-bottom: 10px;
-    color: #333;
+.login-form input[type="text"],
+.login-form input[type="email"],
+.login-form input[type="password"], /* Assuming password might be for an area.php related form */
+.login-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
 }
 
-.service-item p {
-    color: #666;
-}
-
-
-
-/* Pie de página */
-footer {
-    background-color: #333;
+.login-form button {
+    background-color: #007bff;
     color: #fff;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
+
+.login-form button:hover {
+    background-color: #0056b3;
+}
+
+.login-error-message {
+    color: red;
     text-align: center;
-    padding-top: 25px;
-    /* Adjusted vertical padding */
-    padding-bottom: 25px;
-    /* Adjusted vertical padding */
+    padding: 10px;
+    border: 1px solid red;
+    background-color: #ffebeb;
+    margin: 15px 0;
+}
+
+/* Sección de contacto */
+.contact {
+    background-color: #eee;
+    padding-top: 50px;  /* Vertical padding */
+    padding-bottom: 50px; /* Vertical padding */
+    /* text-align: center; */
+}
+
+.contact h2 { /* Ensure this is inside .content-wrapper or has its own centering */
+    font-size: 2.5em;
+    margin-top: 0;
+    margin-bottom: 30px;
+    color: #333;
+    text-align: center; /* Center the heading */
+}
+
+.contact-form { /* This is already well-styled for centering within its parent */
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff; /* Optional: give form a background if .contact is #eee */
+    border-radius: 5px;    /* Optional: if adding background */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* Optional subtle shadow */
+}
+
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form input[type="password"], /* Assuming password might be for an area.php related form */
+.contact-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.contact-form button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
+
+.contact-form button:hover {
+    background-color: #0056b3;
+}
+
+/* --- Стили для навигации пользователя --- */
+
+/* Заставляет этот список меню "прижаться" к правому краю */
+.personal-area {
+    margin-left: auto;
+}
+
+/* Стиль для приветствия */
+.nav-user-greeting {
+    padding: 10px 15px;
+    color: #666;
+    font-weight: 600;
+}
+
+/* Стиль для кнопки/ссылки выхода */
+.logout-button {
+    background-color: #dc3545; /* Красный цвет для опасных действий */
+    color: #fff !important; /* !important, чтобы переопределить цвет ссылки */
+    border-radius: 5px;
+    padding: 10px 15px;
+    transition: background-color 0.3s ease;
+}
+
+.logout-button:hover {
+    background-color: #c82333;
+}
+/* --- Стили для страницы контактов --- */
+
+.contact-page-section {
+    padding: 60px 0;
+    background-color: #fff; /* Белый фон для этой секции */
+}
+
+/* Контейнер для двух колонок: информация + форма */
+.contact-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Две колонки одинаковой ширины */
+    gap: 40px; /* Пространство между колонками */
+    margin-top: 40px;
+}
+
+/* Стилизация левой колонки с деталями */
+.contact-details h3 {
+    font-size: 1.8em;
+    color: var(--color-dark);
+    border-bottom: 2px solid var(--color-primary);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.contact-details p {
+    margin-bottom: 20px;
+    line-height: 1.8;
+    font-size: 1.1em;
+}
+
+.contact-details strong {
+    color: var(--color-text-dark);
+}
+
+/* Карта */
+.map-container {
+    width: 100%;
+    height: 400px;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-soft);
+    border: 1px solid var(--color-border);
+}
+
+.map-container iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+/* Новый стиль для ссылки с иконкой */
+.whatsapp-link {
+    display: inline-flex; /* Чтобы иконка и текст были в одну линию */
+    align-items: center;  /* Вертикальное выравнивание по центру */
+    gap: 10px;            /* Пространство между иконкой и текстом */
+    text-decoration: none;
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #25D366; /* Фирменный цвет WhatsApp */
+    transition: opacity 0.3s ease;
+}
+
+.whatsapp-link:hover {
+    opacity: 0.8; /* Легкий эффект при наведении */
+    color: #1DA851;
+}
+
+/* Стиль для самой иконки */
+.whatsapp-link .bi-whatsapp {
+    font-size: 2em; /* Делаем иконку большой и заметной */
+}
+
+/* Адаптация для мобильных устройств */
+@media (max-width: 768px) {
+    .contact-layout {
+        grid-template-columns: 1fr; /* Колонки встают друг под другом */
+    }
+}
+/* --- Стили для страницы калькулятора --- */
+.calculator-form .row {
+    --bs-gutter-x: 1.5rem;
+}
+
+.calculation-result-panel {
+    background-color: #e2f3ff;
+    border-left: 5px solid var(--color-primary);
+    padding: 25px;
+    margin-top: 30px;
+    border-radius: var(--border-radius);
+}
+
+.calculation-result-panel h4 {
+    color: var(--color-primary);
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.calculation-result-panel p {
+    margin-bottom: 5px;
+    font-size: 1.1em;
+}
+
+.calculation-result-panel .total-cost {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: var(--color-dark);
+    margin-top: 15px;
 }

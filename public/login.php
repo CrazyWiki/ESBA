@@ -1,25 +1,21 @@
 <?php
-// La sesión ya NO se inicia aquí. Se inicia de forma segura dentro de 'header.php'.
-// La lógica de redirección se basa en la sesión que 'header.php' ya inició.
+include 'includes/header.php';
 
-// Si un ADMINISTRADOR ya ha iniciado sesión, redirigir al panel de administración.
-if (isset($_SESSION['admin_id'])) {
-    header("Location: area_personal_admin.php");
+if (isset($_SESSION['user_id']) && isset($_SESSION['role'])) {
+    $role = $_SESSION['role'];
+    $redirect_page = 'index.php';
+    switch ($role) {
+        case 'administrador': $redirect_page = 'area_personal_admin.php'; break;
+        case 'conductor': $redirect_page = 'area_personal_conductor.php'; break;
+        case 'cliente': $redirect_page = 'area_personal_cliente.php'; break;
+    }
+    header("Location: " . $redirect_page);
     exit();
 }
 
-// Si un EMPLEADO normal ya ha iniciado sesión, redirigir a su área personal.
-if (isset($_SESSION['empleado_id']) && !isset($_SESSION['admin_id'])) { 
-    header("Location: area_empleado.php"); // REEMPLAZA 'area_empleado.php' con la página real para empleados
-    exit();
-}
-
-// Obtener el mensaje de error de inicio de sesión, si existe, desde la sesión.
 $login_error = $_SESSION['login_error'] ?? '';
-// Limpiar el mensaje de la sesión después de mostrarlo para que no aparezca de nuevo.
-unset($_SESSION['login_error']); 
+unset($_SESSION['login_error']);
 ?>
-<?php include 'includes/header.php'; // Tu header existente, que ahora maneja session_start() ?>
 
 <main class="registro">
     <h2>Login</h2>
@@ -53,7 +49,13 @@ unset($_SESSION['login_error']);
         </form>
     </div>
 
-</main>
+    <div class="registro-link-container">
+        <p>
+            ¿Aún no tienes una cuenta? 
+            <a href="registro.php">Regístrate aquí</a>
+        </p>
+    </div>
+    </main>
 
 <script src="js/login.js"></script>
-<?php include 'includes/footer.php'; // Tu footer existente ?>
+<?php include 'includes/footer.php'; ?>
