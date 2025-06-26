@@ -1,0 +1,45 @@
+<?php
+session_start();
+require_once '../../server/database.php';
+
+// Сообщение об ошибке по умолчанию
+$login_error_message = 'Correo electrónico o contraseña incorrectos.';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $email = $_POST['email'] ?? '';
+    $password = $_POST['password'] ?? '';
+
+    if (!empty($email) && !empty($password)) {
+        // ИЗМЕНЕНИЕ: Запрос теперь к таблице Usuarios
+        $stmt = $conn->prepare("SELECT id_usuario, password_hash FROM Usuarios WHERE email = ?");
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($user = $result->fetch_assoc()) {
+            // Проверяем хеш пароля
+            if (password_verify($password, $user['password_hash'])) {
+                
+                // УСПЕХ! Создаем сессию с теми же именами, что и для сотрудников
+                $_SESSION['user_id'] = $user['id_usuario'];
+                $_SESSION['user_email'] = $email;
+                $_SESSION['role'] = 'cliente'; // Четко указываем роль
+
+                // Закрываем соединение и перенаправляем в личный кабинет клиента
+                $stmt->close();
+                $conn->close();
+                header("Location: ../area_personal_cliente.php"); // Убедитесь, что страница так называется
+                exit();
+            }
+        }
+    } else {
+        $login_error_message = 'Por favor, ingrese su email y contraseña.';
+    }
+    $stmt->close();
+}
+
+// ИЗМЕНЕНИЕ: Если вход не удался, сохраняем ошибку в сессию и возвращаем на страницу входа
+$_SESSION['login_error'] = $login_error_message;
+$conn->close();
+header("Location: ../login.php");
+exit();
