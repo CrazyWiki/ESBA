@@ -2,11 +2,6 @@
 // Archivo: public/area_personal_gerente.php
 // Propósito: Permite al Gerente de Ventas gestionar y ver todos los envíos.
 session_start();
-
-echo '<pre>';
-print_r($_SESSION);
-echo '</pre>';
-
 include 'includes/header.php';
 if (
     empty($_SESSION['user_id']) ||

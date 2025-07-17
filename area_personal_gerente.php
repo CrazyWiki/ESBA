@@ -240,7 +240,27 @@ $sql .= " ORDER BY e.fecha_envio DESC, e.envio_id DESC";
                                     $desc_adicional_usuario = htmlspecialchars($envio['detalles_paquete_json']);
                                 }
                     ?>
+
+
+
+
+
                                 <tr data-envio-id="<?php echo htmlspecialchars($envio['envio_id']); ?>">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                                     <td><?php echo htmlspecialchars($envio['envio_id']); ?></td>
                                     <td><?php echo htmlspecialchars(date("d/m/Y", strtotime($envio['fecha_envio']))); ?></td>
                                     <td><?php echo htmlspecialchars($envio['lugar_origen']); ?></td>
@@ -256,6 +276,7 @@ $sql .= " ORDER BY e.fecha_envio DESC, e.envio_id DESC";
                                             <?php echo htmlspecialchars($envio['estado_actual_desc']); ?>
                                         </span>
                                     </td>
+
                                     <td>
                                         <button type="button" class="btn btn-sm btn-info view-order-details" data-envio-id="<?php echo htmlspecialchars($envio['envio_id']); ?>">Ver Detalles</button>
                                     </td>
@@ -275,13 +296,13 @@ $sql .= " ORDER BY e.fecha_envio DESC, e.envio_id DESC";
                         <?php endif; ?>
                 </tbody>
             </table>
-            <?php
+        <?php
                         $stmt->close();
                     } else {
                         echo '<div class="user-message error-message">Error al preparar la consulta de envíos.</div>';
                     }
                     $conn->close();
-            ?>
+        ?>
         </div>
     </div>
 </section>
@@ -294,80 +315,54 @@ $sql .= " ORDER BY e.fecha_envio DESC, e.envio_id DESC";
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="editOrderForm">
+                <form id="editOrderForm" novalidate>
                     <input type="hidden" id="editEnvioId" name="envio_id">
-                    <input type="hidden" id="editIdCliente" name="id_cliente"> <input type="hidden" id="editIdDetalleEnvio" name="id_detalle_envio"> <h6 class="mb-3">Información del Envío:</h6>
-                    <div class="mb-3">
-                        <label for="editFechaEnvio" class="form-label">Fecha de Envío:</label>
-                        <input type="date" class="form-control" id="editFechaEnvio" name="fecha_envio" required>
+                    <input type="hidden" id="editIdCliente" name="id_cliente">
+                    <input type="hidden" id="editIdDetalleEnvio" name="id_detalle_envio">
+
+                    <h6 class="mb-3">Información del Envío:</h6>
+                    <div class="row">
+                        <div class="col-md-6 mb-3"><label for="editFechaEnvio" class="form-label">Fecha de Envío:</label><input type="date" class="form-control" id="editFechaEnvio" name="fecha_envio" required></div>
+                        <div class="col-md-6 mb-3"><label for="editKm" class="form-label">KM:</label><input type="number" step="0.1" class="form-control" id="editKm" name="km" required></div>
                     </div>
-                    <div class="mb-3">
-                        <label for="editLugarOrigen" class="form-label">Lugar de Origen:</label>
-                        <input type="text" class="form-control" id="editLugarOrigen" name="lugar_origen" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="editLugarDestino" class="form-label">Lugar de Destino:</label>
-                        <input type="text" class="form-control" id="editLugarDestino" name="lugar_distinto" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="editKm" class="form-label">KM:</label>
-                        <input type="number" step="0.1" class="form-control" id="editKm" name="km" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="editTipoVehiculo" class="form-label">Tipo de Vehículo:</label>
-                        <select class="form-select" id="editTipoVehiculo" name="Vehiculos_vehiculos_id">
-                            </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="editEstado" class="form-label">Estado:</label>
-                        <select class="form-select" id="editEstado" name="EstadoEnvio_estado_envio_id1">
-                            </select>
+                    <div class="mb-3"><label for="editLugarOrigen" class="form-label">Lugar de Origen:</label><input type="text" class="form-control" id="editLugarOrigen" name="lugar_origen" required></div>
+                    <div class="mb-3"><label for="editLugarDestino" class="form-label">Lugar de Destino:</label><input type="text" class="form-control" id="editLugarDestino" name="lugar_distinto" required></div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3"><label for="editTipoVehiculo" class="form-label">Vehículo Asignado:</label><select class="form-select" id="editTipoVehiculo" name="Vehiculos_vehiculos_id" required></select></div>
+                        <div class="col-md-6 mb-3"><label for="editEstado" class="form-label">Estado del Envío:</label><select class="form-select" id="editEstado" name="EstadoEnvio_estado_envio_id1" required></select></div>
                     </div>
 
                     <hr>
                     <h6 class="mb-3">Detalles del Cliente:</h6>
-                    <div class="mb-3">
-                        <label for="editNombreCliente" class="form-label">Nombre Cliente:</label>
-                        <input type="text" class="form-control" id="editNombreCliente" name="nombre_cliente" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="editApellidoCliente" class="form-label">Apellido Cliente:</label>
-                        <input type="text" class="form-control" id="editApellidoCliente" name="apellido_cliente" required>
+                    <div class="row">
+                        <div class="col-md-6 mb-3"><label for="editNombreCliente" class="form-label">Nombre:</label><input type="text" class="form-control" id="editNombreCliente" name="nombre_cliente" required></div>
+                        <div class="col-md-6 mb-3"><label for="editApellidoCliente" class="form-label">Apellido:</label><input type="text" class="form-control" id="editApellidoCliente" name="apellido_cliente" required></div>
                     </div>
                     <p class="mb-3"><strong>Email:</strong> <span id="displayEmailCliente"></span></p>
-                    <div class="mb-3">
-                        <label for="editDocumentoCliente" class="form-label">Documento:</label>
-                        <input type="text" class="form-control" id="editDocumentoCliente" name="numero_documento" required>
+                    <div class="row">
+                        <div class="col-md-6 mb-3"><label for="editDocumentoCliente" class="form-label">Documento:</label><input type="text" class="form-control" id="editDocumentoCliente" name="numero_documento" required></div>
+                        <div class="col-md-6 mb-3"><label for="editTelefonoCliente" class="form-label">Teléfono:</label><input type="tel" class="form-control" id="editTelefonoCliente" name="telefono" required></div>
                     </div>
+
+                    <hr>
+                    <h6 class="mb-3">Gestión de Costos</h6>
                     <div class="mb-3">
-                        <label for="editTelefonoCliente" class="form-label">Teléfono:</label>
-                        <input type="tel" class="form-control" id="editTelefonoCliente" name="telefono" required>
+                        <label for="editCostoFinal" class="form-label">Costo Final (Corregido):</label>
+                        <div class="input-group">
+                            <span class="input-group-text">$</span>
+                            <input type="number" step="0.01" class="form-control" id="editCostoFinal" name="costo_final_corregido" required>
+                        </div>
                     </div>
 
                     <hr>
                     <h6 class="mb-3">Detalles del Paquete:</h6>
-                    <div class="mb-3">
-                        <label for="editPesoKg" class="form-label">Peso (kg):</label>
-                        <input type="number" step="0.1" class="form-control" id="editPesoKg" name="peso_kg" required>
+                    <div class="row">
+                        <div class="col-md-3 mb-3"><label for="editPesoKg" class="form-label">Peso (kg):</label><input type="number" step="0.1" class="form-control" id="editPesoKg" name="peso_kg" required></div>
+                        <div class="col-md-3 mb-3"><label for="editLargoCm" class="form-label">Largo (cm):</label><input type="number" step="0.1" class="form-control" id="editLargoCm" name="largo_cm" required></div>
+                        <div class="col-md-3 mb-3"><label for="editAnchoCm" class="form-label">Ancho (cm):</label><input type="number" step="0.1" class="form-control" id="editAnchoCm" name="ancho_cm" required></div>
+                        <div class="col-md-3 mb-3"><label for="editAltoCm" class="form-label">Alto (cm):</label><input type="number" step="0.1" class="form-control" id="editAltoCm" name="alto_cm" required></div>
                     </div>
-                    <div class="mb-3">
-                        <label for="editLargoCm" class="form-label">Largo (cm):</label>
-                        <input type="number" step="0.1" class="form-control" id="editLargoCm" name="largo_cm" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="editAnchoCm" class="form-label">Ancho (cm):</label>
-                        <input type="number" step="0.1" class="form-control" id="editAnchoCm" name="ancho_cm" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="editAltoCm" class="form-label">Alto (cm):</label>
-                        <input type="number" step="0.1" class="form-control" id="editAltoCm" name="alto_cm" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="editDescripcionAdicional" class="form-label">Descripción Adicional:</label>
-                        <textarea class="form-control" id="editDescripcionAdicional" name="descripcion_adicional_usuario" rows="3"></textarea>
-                    </div>
-                    
-                    <p class="mb-3"><strong>Costo Estimado:</strong> $<span id="displayCostoEstimado"></span></p>
+                    <div class="mb-3"><label for="editDescripcionAdicional" class="form-label">Descripción Adicional:</label><textarea class="form-control" id="editDescripcionAdicional" name="descripcion_adicional_usuario" rows="2"></textarea></div>
 
                 </form>
                 <div id="modalResponseStatus" class="mt-3"></div>
